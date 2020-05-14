@@ -29,6 +29,8 @@ public class CommentService {
         CreatedComment createdComment = new CreatedComment();
         BeanUtils.copyProperties(this, createdComment);
         createdComment.publishAfterCommit();
+
+        System.out.println(("********* CreatedComment OK **********"));
     }
 
     @PreUpdate
@@ -36,6 +38,8 @@ public class CommentService {
         EditedComment editedComment = new EditedComment();
         BeanUtils.copyProperties(this, editedComment);
         editedComment.publishAfterCommit();
+
+        System.out.println(("********* EditedComment OK **********"));
     }
 
     @PreRemove
@@ -43,6 +47,8 @@ public class CommentService {
         DeletedComment deletedComment = new DeletedComment();
         BeanUtils.copyProperties(this, deletedComment);
         deletedComment.publishAfterCommit();
+
+        System.out.println(("********* DeletedComment OK **********"));
     }
 
     public Long getCommentId() {
