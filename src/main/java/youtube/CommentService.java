@@ -22,7 +22,8 @@ public class CommentService {
     private Long clientId;
     private Long videoId;
     private String contents;
-    private int totalComment = 0; // 댓글수
+
+    private int commentCount = 0; // 댓글수
 
     @PrePersist
     public void onPrePersist(){
@@ -87,16 +88,16 @@ public class CommentService {
         this.contents = contents;
     }
 
-    public int getTotalComment() {
-        return totalComment;
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    public void setTotalComment(int totalComment) {
-        this.totalComment = totalComment;
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
-    public void addTotalView(int totalComment) {
-        this.totalComment += totalComment;
+    public void addTotalView(int commentCount) {
+        this.commentCount += commentCount;
     }
 
 }
