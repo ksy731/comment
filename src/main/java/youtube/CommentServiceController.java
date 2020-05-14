@@ -1,4 +1,4 @@
-package youtube_ksy;
+package youtube;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
- @RestController
+@RestController
  public class CommentServiceController {
 
-
- }
+   @RequestMapping(value = "/editComment", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+   public void editComment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+      System.out.println("##### /commentServices/editComment called !!!!!!!!!!!! #####");
+   }
+}

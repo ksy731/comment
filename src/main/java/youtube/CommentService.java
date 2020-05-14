@@ -1,38 +1,49 @@
-package youtube_ksy;
+package youtube;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.BeanUtils;
 import java.util.List;
+import org.springframework.cloud.stream.messaging.Processor;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.MimeTypeUtils;
 
 @Entity
 @Table(name="CommentService_table")
 public class CommentService {
-
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long commentId;
     private Long channelId;
     private Long clientId;
     private Long videoId;
     private String contents;
+    private int totalComment = 0; // 댓글수
 
     @PrePersist
     public void onPrePersist(){
         CreatedComment createdComment = new CreatedComment();
         BeanUtils.copyProperties(this, createdComment);
         createdComment.publishAfterCommit();
+    }
 
-
+    @PreUpdate
+    public void onPostEdited(){
         EditedComment editedComment = new EditedComment();
         BeanUtils.copyProperties(this, editedComment);
         editedComment.publishAfterCommit();
+    }
 
-
+    @PreRemove
+    public void onPostRemove(){
         DeletedComment deletedComment = new DeletedComment();
         BeanUtils.copyProperties(this, deletedComment);
         deletedComment.publishAfterCommit();
-
-
     }
-
 
     public Long getCommentId() {
         return commentId;
@@ -70,7 +81,16 @@ public class CommentService {
         this.contents = contents;
     }
 
+    public int getTotalComment() {
+        return totalComment;
+    }
 
+    public void setTotalComment(int totalComment) {
+        this.totalComment = totalComment;
+    }
 
+    public void addTotalView(int totalComment) {
+        this.totalComment += totalComment;
+    }
 
 }

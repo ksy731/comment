@@ -1,5 +1,5 @@
-package youtube_ksy;
-import youtube_ksy.config.kafka.KafkaProcessor;
+package youtube;
+import youtube.config.kafka.KafkaProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableBinding(KafkaProcessor.class)
-@EnableFeignClients
+//@EnableFeignClients
 public class Application {
     protected static ApplicationContext applicationContext;
     public static void main(String[] args) {

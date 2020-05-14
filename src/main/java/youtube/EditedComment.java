@@ -1,4 +1,4 @@
-package youtube_ksy;
+package youtube;
 
 public class EditedComment extends AbstractEvent {
 
